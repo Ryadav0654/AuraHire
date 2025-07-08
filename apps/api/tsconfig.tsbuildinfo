@@ -1,0 +1,1 @@
+{"root":["./src/app.ts","./src/controllers/jobs.controller.ts","./src/controllers/upload.controller.ts","./src/middleware/multer.ts","./src/routers/job.route.ts","./src/routers/upload.route.ts"],"version":"5.8.3"}

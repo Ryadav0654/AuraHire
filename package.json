@@ -1,5 +1,5 @@
 {
-  "name": "with-tailwind",
+  "name": "aurahire.ai",
   "private": true,
   "scripts": {
     "build": "turbo run build",
@@ -14,6 +14,12 @@
     "turbo": "^2.5.4"
   },
   "packageManager": "pnpm@8.15.6",
+  "workspaces": [
+    "apps/web",
+    "apps/@repo/api",
+    "packages/@repo/db",
+    "packages/@repo/ui"
+  ],
   "engines": {
     "node": ">=18"
   }
