@@ -6,7 +6,8 @@
   "exports": {
     "./main": "./src/index.ts",
     "./jobModel": "./src/model/jobSchema.ts",
-    "./resumeModel": "./src/model/resumeSchema.ts"
+    "./resumeModel": "./src/model/resumeSchema.ts",
+    "./feedbackModel": "./src/model/feedbackSchema.ts"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

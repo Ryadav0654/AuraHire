@@ -8,6 +8,6 @@
       "@lib/*": ["lib/*"]
     }
   },
-  "include": ["src"],
+  "include": ["src", "components"],
   "exclude": ["dist", "build", "node_modules"]
 }

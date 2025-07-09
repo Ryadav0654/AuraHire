@@ -1,6 +1,4 @@
 import OpenAI from "openai";
-import dotenv from "dotenv";
-dotenv.config();
 
 const apiKey = process.env.OPENAI_API_KEY;
 
@@ -23,4 +21,4 @@ const main = async () => {
   console.log(response.output[0]);
 };
 
-main();
+export default main;

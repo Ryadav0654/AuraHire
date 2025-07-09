@@ -5,6 +5,7 @@ import { handleUpload } from "../utils/cloudinary";
 
 const resumeUploadController = async (req: Request, res: Response) => {
   try {
+    console.log("req: ", req);
     const file = req.file;
     if (!file) {
       res.status(400).json({ message: "Resume is required" });
@@ -48,6 +49,8 @@ const resumeUploadController = async (req: Request, res: Response) => {
 
 const getResume = async (req: Request, res: Response) => {
   try {
+    console.log("req", req);
+    // console.log("reqAuth: ", req)
     const resumes = await Resume.find();
 
     if (!resumes) {
