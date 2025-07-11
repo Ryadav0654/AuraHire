@@ -26,6 +26,7 @@ import {
   ChevronRight,
 } from "lucide-react";
 import Link from "next/link";
+import ResumeAnalyzer from "../analyzertest/page";
 const Dashboard = () => {
   const [activeTab, setActiveTab] = useState("dashboard");
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
@@ -124,7 +125,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex relative transition-colors duration-300">
+    <div className="h-screen bg-gray-50 dark:bg-gray-900 flex relative transition-colors duration-300">
       {/* Mobile Overlay */}
       {mobileMenuOpen && (
         <div
@@ -171,25 +172,22 @@ const Dashboard = () => {
           className={`flex-1  ${sidebarCollapsed ? "lg:px-2" : "lg:px-4"} py-4 space-y-1 lg:space-y-2 overflow-y-auto`}
         >
           {navigationItems.map((item) => (
-            <Link
-              href={item.slug}
+            <button
               key={item.id}
               onClick={() => {
                 setActiveTab(item.id);
                 setMobileMenuOpen(false);
-             
               }}
-              className={`w-full flex items-center space-x-2 lg:space-x-3 px-4 lg:px-3 py-2 lg:py-2.5 rounded-lg transition-colors text-md lg:text-base ${
-                activeTab === item.id
+              className={`w-full flex items-center space-x-2 lg:space-x-3 px-4 lg:px-3 py-2 lg:py-2.5 rounded-lg transition-colors text-md lg:text-base ${activeTab === item.id
                   ? "bg-teal-50 dark:bg-teal-900/30 text-teal-700 dark:text-teal-300 border border-teal-200 dark:border-teal-700"
                   : "text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white"
-              }`}
+                }`}
             >
               <item.icon className="w-5 h-5 lg:w-5 lg:h-5 flex-shrink-0" />
               {(!sidebarCollapsed || mobileMenuOpen) && (
                 <span className="font-medium truncate">{item.label}</span>
               )}
-            </Link>
+            </button>
           ))}
         </nav>
 
@@ -197,7 +195,7 @@ const Dashboard = () => {
         {!mobileMenuOpen && (
           <div className="hidden lg:block p-3">
             <div
-              className={`w-full  flex items-center justify-between ${!sidebarCollapsed && "px-3 py-2 border border-gray-200 dark:border-gray-400 rounded-xl"}`}
+              className={`w-full flex items-center justify-between `}
             >
               {!sidebarCollapsed && (
                 <p className="text-lg font-medium text-gray-500 dark:text-gray-300">
@@ -275,16 +273,20 @@ const Dashboard = () => {
         </header>
 
         {/* Dashboard Content */}
-        <main className="flex-1 p-3 sm:p-4 lg:p-6 space-y-4 lg:space-y-6 overflow-x-hidden">
+        <main className="flex-1 p-3 sm:p-4 lg:p-6 space-y-4 lg:space-y-6 overflow-x-hidden overflow-y-scroll scroll-smooth max-h-screen ">
+          {activeTab === 'analyzer' && <ResumeAnalyzer />}
           {/* Welcome Section */}
-          <div className="bg-gradient-to-r from-teal-500 to-blue-600 rounded-xl p-4 lg:p-6 text-white">
-            <h1 className="text-lg sm:text-xl lg:text-2xl font-bold mb-2">
-              Welcome back, Ravindra! 👋
-            </h1>
-            <p className="text-teal-100 text-sm lg:text-base opacity-90">
-              Ready to optimize your job search with AI-powered insights?
-            </p>
-          </div>
+          {
+            activeTab === 'dashboard' && (
+              <>
+              <div className="bg-gradient-to-r from-teal-500 to-blue-600 rounded-xl p-4 lg:p-6 text-white">
+                <h1 className="text-lg sm:text-xl lg:text-2xl font-bold mb-2">
+                  Welcome back, Ravindra! 👋
+                </h1>
+                <p className="text-teal-100 text-sm lg:text-base opacity-90">
+                  Ready to optimize your job search with AI-powered insights?
+                </p>
+              </div>
 
           {/* Quick Actions Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
@@ -380,7 +382,7 @@ const Dashboard = () => {
                           (job) => job.status === "Applied"
                         ).length /
                           jobApplications.length) *
-                          100
+                        100
                       ),
                     },
                     {
@@ -394,7 +396,7 @@ const Dashboard = () => {
                           (job) => job.status === "Interview"
                         ).length /
                           jobApplications.length) *
-                          100
+                        100
                       ),
                     },
                     {
@@ -407,7 +409,7 @@ const Dashboard = () => {
                         (jobApplications.filter((job) => job.status === "Offer")
                           .length /
                           jobApplications.length) *
-                          100
+                        100
                       ),
                     },
                     {
@@ -427,7 +429,7 @@ const Dashboard = () => {
                             )
                         ).length /
                           jobApplications.length) *
-                          100
+                        100
                       ),
                     },
                   ]
@@ -483,20 +485,18 @@ const Dashboard = () => {
                     <div className="flex items-center space-x-2 lg:space-x-3 flex-shrink-0">
                       <div className="w-16 sm:w-20 lg:w-24 h-2 bg-gray-200 dark:bg-gray-600 rounded-full">
                         <div
-                          className={`h-2 rounded-full ${
-                            item.color === "green"
+                          className={`h-2 rounded-full ${item.color === "green"
                               ? "bg-green-500"
                               : "bg-yellow-500"
-                          }`}
+                            }`}
                           style={{ width: `${item.value}%` }}
                         ></div>
                       </div>
                       <span
-                        className={`text-sm font-medium min-w-[3rem] text-right ${
-                          item.color === "green"
+                        className={`text-sm font-medium min-w-[3rem] text-right ${item.color === "green"
                             ? "text-green-600"
                             : "text-yellow-600"
-                        }`}
+                          }`}
                       >
                         {item.value}%
                       </span>
@@ -702,32 +702,29 @@ const Dashboard = () => {
                 ].map((metric, index) => (
                   <div
                     key={index}
-                    className={`flex items-center justify-between p-3 lg:p-4 rounded-lg ${
-                      metric.color === "green"
+                    className={`flex items-center justify-between p-3 lg:p-4 rounded-lg ${metric.color === "green"
                         ? "bg-green-50 dark:bg-green-900/20"
                         : metric.color === "blue"
                           ? "bg-blue-50 dark:bg-blue-900/20"
                           : "bg-yellow-50 dark:bg-yellow-900/20"
-                    }`}
+                      }`}
                   >
                     <div className="flex items-center space-x-3 min-w-0 flex-1">
                       <div
-                        className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 ${
-                          metric.color === "green"
+                        className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 ${metric.color === "green"
                             ? "bg-green-100 dark:bg-green-800"
                             : metric.color === "blue"
                               ? "bg-blue-100 dark:bg-blue-800"
                               : "bg-yellow-100 dark:bg-yellow-800"
-                        }`}
+                          }`}
                       >
                         <metric.icon
-                          className={`w-4 h-4 ${
-                            metric.color === "green"
+                          className={`w-4 h-4 ${metric.color === "green"
                               ? "text-green-600"
                               : metric.color === "blue"
                                 ? "text-blue-600"
                                 : "text-yellow-600"
-                          }`}
+                            }`}
                         />
                       </div>
                       <div className="min-w-0 flex-1">
@@ -740,13 +737,12 @@ const Dashboard = () => {
                       </div>
                     </div>
                     <div
-                      className={`text-lg lg:text-2xl font-bold flex-shrink-0 ${
-                        metric.color === "green"
+                      className={`text-lg lg:text-2xl font-bold flex-shrink-0 ${metric.color === "green"
                           ? "text-green-600"
                           : metric.color === "blue"
                             ? "text-blue-600"
                             : "text-yellow-600"
-                      }`}
+                        }`}
                     >
                       {metric.value}
                     </div>
@@ -755,6 +751,31 @@ const Dashboard = () => {
               </div>
             </div>
           </div>
+          </>
+          )}
+          {activeTab === 'tracker' && (
+            <div className="text-center py-12">
+              <Briefcase className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">Job Tracker</h3>
+              <p className="text-gray-600 dark:text-gray-300">Advanced job tracking features coming soon!</p>
+            </div>
+          )}
+
+          {activeTab === 'insights' && (
+            <div className="text-center py-12">
+              <BarChart3 className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">Insights</h3>
+              <p className="text-gray-600 dark:text-gray-300">Detailed analytics and insights coming soon!</p>
+            </div>
+          )}
+
+          {activeTab === 'settings' && (
+            <div className="text-center py-12">
+              <Settings className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">Settings</h3>
+              <p className="text-gray-600 dark:text-gray-300">Account settings and preferences coming soon!</p>
+            </div>
+          )}
         </main>
       </div>
     </div>

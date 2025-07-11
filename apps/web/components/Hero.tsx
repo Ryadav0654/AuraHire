@@ -1,6 +1,6 @@
 import React from "react";
 import { ArrowRight, Play } from "lucide-react";
-import { Button } from "@repo/ui/components/ui/button";
+
 const Hero = () => {
   return (
     <section className="relative pt-16 pb-32 overflow-hidden">
@@ -36,20 +36,18 @@ const Hero = () => {
 
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
-            <Button
-            variant={"default"}
+            <button
             className="group px-8 py-4 bg-[#00C1D4] text-white rounded-xl hover:bg-[#00A5B8] transition-all duration-300 font-semibold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 flex items-center space-x-2"
             >
              Get Started Free
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </Button>
-            <Button
-            variant="ghost"
+            </button>
+            <button
               className="group px-8 py-4 bg-white/80 dark:bg-slate-800/80 backdrop-blur-md text-[#0A2463] dark:text-white rounded-xl hover:bg-white/90 dark:hover:bg-slate-700/90 transition-all duration-300 font-semibold text-lg border border-gray-200 dark:border-slate-600 flex items-center space-x-2"
             >
               <Play className="w-5 h-5" />
               <span>See How It Works</span>
-            </Button>
+            </button>
           </div>
 
           {/* Visual Placeholder */}

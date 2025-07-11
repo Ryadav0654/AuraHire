@@ -1,7 +1,6 @@
 
 import React from "react";
 import Link from "next/link";
-import { Avatar, AvatarFallback, AvatarImage } from "@repo/ui/components/ui/avatar"
 // import { Link, Moon, Sun } from 'lucide-react';
 // import { useDarkMode } from '../context/DarkModeContext';
 // import { useUser } from "@clerk/nextjs";

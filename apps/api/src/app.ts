@@ -7,7 +7,7 @@ import { v2 as cloudinary } from "cloudinary";
 import resumeRouter from "./routers/resume.route";
 import jobRouter from "./routers/job.route";
 import feedbackRouter from "./routers/feedback.route";
-
+import atsRouter from "./routers/ats.route";
 // import mongoose from "mongoose";
 
 const app: Express = express();
@@ -33,6 +33,7 @@ const port: string | number = process.env.PORT || 8080;
 app.use("/api/v1/resume", resumeRouter);
 app.use("/api/v1/job", jobRouter);
 app.use("/api/v1/feedback", feedbackRouter);
+app.use("/api/v1/ats", atsRouter);
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Hello from AuraHire.ai backed! Coming soon...");
