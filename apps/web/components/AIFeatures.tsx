@@ -19,7 +19,7 @@ const AIFeatures = () => {
     },
     {
       title: "Follow-Up Autopilot",
-      description: "Intelligent reminders for critical actions and deadlines",
+      description: "Intelligent reminders for critical actions and deadlines with AI",
       icon: Clock,
       gradient: "from-blue-500 to-cyan-500",
     },
@@ -85,7 +85,7 @@ const AIFeatures = () => {
               <div className="bg-white/60 dark:bg-slate-800/60 backdrop-blur-md rounded-2xl p-8 border border-gray-200 dark:border-slate-700 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3">
                 {/* Icon */}
                 <div
-                  className={`w-16 h-16 bg-gradient-to-r ${feature.gradient} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}
+                  className={`w-16 h-16 bg-gradient-to-r ${feature.gradient} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 z-100`}
                 >
                   <feature.icon className="w-8 h-8 text-white" />
                 </div>
@@ -100,17 +100,18 @@ const AIFeatures = () => {
 
                 {/* Hover Glow Effect */}
                 <div
-                  className={`absolute inset-0 bg-gradient-to-r ${feature.gradient} rounded-2xl opacity-0 group-hover:opacity-5 transition-opacity duration-500`}
-                ></div>
+                  className={`relative  inset-0 bg-gradient-to-r ${feature.gradient} rounded-2xl opacity-80 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none`}
+                />
 
                 {/* Animated Border */}
-                <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-50 transition-opacity duration-500 pointer-events-none">
                   <div
                     className={`absolute inset-0 rounded-2xl bg-gradient-to-r ${feature.gradient} p-0.5`}
                   >
-                    <div className="w-full h-full bg-white/60 dark:bg-slate-800/60 backdrop-blur-md rounded-2xl"></div>
+                    <div className="w-full h-full bg-white/60 dark:bg-slate-800/60 backdrop-blur-md rounded-2xl" />
                   </div>
                 </div>
+
               </div>
             </div>
           ))}

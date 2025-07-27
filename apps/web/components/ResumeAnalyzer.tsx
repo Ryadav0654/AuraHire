@@ -1,8 +1,7 @@
 "use client";
 import React, { useState, useRef } from 'react';
-import { Upload, FileText, Loader2, CheckCircle, AlertCircle, Info, Zap } from 'lucide-react';
-import ReactMarkdown from "react-markdown";
-import gfm from "remark-gfm";
+import { Upload, FileText, Loader2, Zap } from 'lucide-react';
+import ReactMarkdownPretty from 'react-markdown-pretty';
 import apiClient from '../lib/apiClient';
 const ResumeAnalyzer = () => {
   const [jobDescription, setJobDescription] = useState('');
@@ -46,88 +45,73 @@ const ResumeAnalyzer = () => {
     }
   };
 
-//   const handleAnalyze = async () => {
-//     if (!jobDescription.trim() || !uploadedFile) {
-//       alert('Please provide both job description and resume file');
-//       return;
-//     }
+// const mockReport = `
+// # 📊 **ATS & Resume Optimization Report**
 
-//     setIsAnalyzing(true);
-    
-//     // Simulate API call with mock analysis
-//     setTimeout(() => {
-//       const mockAnalysis = `# 📊 ATS Analysis Report
-
-// ## Overall Score: 78/100 ⭐
-
-// # ✅ Strengths
-// - **Keyword Match**: 85% - Excellent alignment with job requirements
-// - **Format Compatibility**: 95% - ATS-friendly structure detected
-// - **Section Organization**: 90% - Clear, logical layout
-
-// # ⚠️ Areas for Improvement
-
-// ### Missing Keywords
-// - [ ] "Machine Learning" - Appears 5 times in job description
-// - [ ] "Python" - Critical technical requirement
-// - [ ] "Data Analysis" - Key responsibility mentioned
-// - [x] "Project Management" - Found in experience section
-// - [x] "Team Leadership" - Well documented
-
-// ## Formatting Recommendations
-// 1. **Contact Information**: Move phone number to header
-// 2. **Skills Section**: Use bullet points instead of paragraphs
-// 3. **Experience Dates**: Use consistent MM/YYYY format
-
-// ### 🎯 Optimization Suggestions
-
-// ## High Priority
-// - Add "Machine Learning" to skills section
-// - Include Python projects in experience
-// - Quantify achievements with specific metrics
-
-// ## Medium Priority
-// - Expand technical skills section
-// - Add relevant certifications
-// - Include industry-specific terminology
-
-// ## 📈 Predicted Success Rate
-// - **ATS Pass Rate**: 82%
-// - **Recruiter Review Probability**: 76%
-// - **Interview Likelihood**: 68%
-
-// ## 🔧 Quick Fixes
-// 1. Replace "Managed team" with "Led cross-functional team of 8 members"
-// 2. Add "Increased efficiency by 25%" to project descriptions
-// 3. Include "Agile/Scrum methodology" experience
+// **⭐ ATS Match Score:** \`78 out of 100\`  
+// > _Your resume shows a strong foundation for this role, but could be enhanced by adding specific keywords and quantifiable achievements._
 
 // ---
-// *Analysis completed in 2.3 seconds using advanced NLP algorithms*`;
 
-//       setAnalysisResult(mockAnalysis);
-//       setIsAnalyzing(false);
-//     }, 3000);
-//   };
+// ## ✅ **Key Strengths & Matches**
+// - **Strong Technical Foundation:** Experience with Python and SQL.
+// - **Project Management:** Led the _"Phoenix Project"_.
+// - **Collaboration:** Worked closely with design and QA teams.
 
+// ---
+
+// ## 💡 **Actionable Improvements for a Higher Score**
+
+// ### 📌 **1. Keyword & Phrase Optimization**
+// **Observation:** Missing "Cloud Cost Optimization" and "CI/CD pipelines".  
+// **Suggestion:** Add them to work experience.  
+// **Example:**  
+// - **Instead of:** "Managed cloud resources."  
+// - **Consider adding:** "Executed a **Cloud Cost Optimization** strategy."
+
+// ---
+
+// ### 📌 **2. Quantify Your Impact**
+// **Observation:** Lacks measurable results.  
+// **Suggestion:** Add numbers.  
+// **Example:**  
+// - **Instead of:** "Improved system performance."  
+// - **Consider adding:** "Improved response time by **30%**."
+
+// ---
+
+// ### 📌 **3. Tailor Your Skills**
+// **Observation:** Missing "Docker" and "Terraform".  
+// **Suggestion:** Add to Technical Skills.
+
+// ---
+
+// ## ✅ **Final Checklist**
+// - [ ] Added missing keywords?
+// - [ ] Added quantifiable metrics?
+// - [ ] Tailored summary to the **[Job Title]**?
+
+// > _This report helps optimize your resume for ATS and recruiters!_
+//     `;
 const handleAnalyze = async () => {
-    console.log("Analyzing resume...");
     if (!jobDescription) return;
-    console.log("Job Description:", true);
     setIsAnalyzing(true);
     setAnalysisResult(null);
+
     const resumeLink = "https://res.cloudinary.com/detzo1qmm/image/upload/v1751985175/resumes/z8pf3ojcyv4zvi5d8ucp.pdf"
     try {
-        const response = await apiClient.post("/api/v1/ats/analyze", {
+        const {data} = await apiClient.post("/api/v1/ats/analyze", {
             jobDescription,
             resume_url: resumeLink
         });
-        if(!response){
+        if(!data){
             console.log("Error while sending ATS response");
             return;
         }
-        console.log("Response:", response.data.report);
+        console.log("Response:", data.report);
       
-        setAnalysisResult(response.data.report);
+        setAnalysisResult(data.report);
+        // setAnalysisResult(mockReport);
     } catch (error) {
         console.error("Error analyzing resume:", error);
     } finally {
@@ -258,9 +242,9 @@ const handleAnalyze = async () => {
 
       {/* Analysis Results */}
       {analysisResult && (
-        <div className="bg-white dark:bg-gray-800 rounded-xl p-3 lg:p-8 border border-gray-200 dark:border-gray-700 shadow-sm">
+        <div className="bg-white dark:bg-transparent p-3 lg:p-8  shadow-sm">
           <div className="prose prose-lg max-w-none dark:prose-invert">
-            <ReactMarkdown remarkPlugins={[gfm]}>{analysisResult}</ReactMarkdown>
+            <ReactMarkdownPretty >{analysisResult}</ReactMarkdownPretty>
           </div>
         </div>
       )}

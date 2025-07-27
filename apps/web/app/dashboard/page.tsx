@@ -149,12 +149,12 @@ const Dashboard = () => {
             <div className="flex items-center space-x-2 lg:space-x-3">
               <div className="w-7 h-7 lg:w-8 lg:h-8  bg-gradient-to-br from-teal-500 to-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
                 <Link href="/" className="text-white font-bold text-xs lg:text-sm">
-                  R
+                  A
                 </Link>
               </div>
               {(!sidebarCollapsed || mobileMenuOpen) && (
                 <Link href="/" className="text-lg lg:text-xl font-bold text-gray-900 dark:text-white truncate">
-                  Resumind
+                  AuraHire
                 </Link>
               )}
             </div>
@@ -248,7 +248,7 @@ const Dashboard = () => {
               </button>
 
               {/* Notifications */}
-              <button className="p-2 dark:hover:bg-gray-700 hover:bg-gray-500 rounded-lg transition-colors relative">
+              <button className="p-2 bg-gray-400 dark:hover:bg-gray-700 hover:bg-gray-500 rounded-lg transition-colors relative">
                 <Bell className="w-4 h-4 lg:w-5 lg:h-5" />
                 <span className="absolute -top-1 -right-1 w-2.5 h-2.5 lg:w-3 lg:h-3 bg-red-500 rounded-full"></span>
               </button>

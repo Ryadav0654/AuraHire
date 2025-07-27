@@ -97,7 +97,7 @@ export default function PricingPage() {
   const currentPlans = plans[billingCycle]
 
   return (
-    <main className="min-h-screen bg-gray-950 text-white py-12 px-6">
+    <main className="min-h-screen dark:bg-[#111a2e] text-white py-12 px-6">
       <div className="max-w-6xl mx-auto text-center">
         <h1 className="text-4xl font-bold mb-3">Pricing Plans</h1>
         <p className="text-gray-400 mb-8">AI Resume Analysis + Smart Job Tracker. Built for job seekers.</p>

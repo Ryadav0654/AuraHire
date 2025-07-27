@@ -1,7 +1,10 @@
+"use client";
 import React from "react";
 import { Plus, Wand2, BarChart3, Trophy } from "lucide-react";
-
+import { useAuth } from "@clerk/nextjs";
+import Link from "next/link";
 const HowItWorks = () => {
+  const { isSignedIn } = useAuth();
   const steps = [
     {
       number: 1,
@@ -107,12 +110,12 @@ const HowItWorks = () => {
           <p className="text-lg text-gray-600 dark:text-gray-300 mb-6">
             Ready to experience the future of job searching?
           </p>
-          <a
-            href="/signup"
+          <Link
+            href={isSignedIn ? "/dashboard" : "/sign-in"}
             className="inline-flex items-center px-8 py-4 bg-[#00C1D4] text-white rounded-xl hover:bg-[#00A5B8] transition-all duration-300 font-semibold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1"
           >
             Start Your Free Trial
-          </a>
+          </Link>
         </div>
       </div>
     </section>
