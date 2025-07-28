@@ -284,7 +284,7 @@ const Dashboard = () => {
               <>
                 <div className="bg-gradient-to-r from-teal-500 to-blue-600 rounded-xl p-4 lg:p-6 text-white">
                   <h1 className="text-lg sm:text-xl lg:text-2xl font-bold mb-2">
-                    Welcome back, Ravindra! 👋
+                    Welcome back, {user?.fullName}! 👋
                   </h1>
                   <p className="text-teal-100 text-sm lg:text-base opacity-90">
                     Ready to optimize your job search with AI-powered insights?
