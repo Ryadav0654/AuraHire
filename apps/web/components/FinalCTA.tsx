@@ -1,7 +1,8 @@
 import React from "react";
 import { ArrowRight, Users, TrendingUp, Clock } from "lucide-react";
-
-const FinalCTA = () => {
+import { auth } from "@clerk/nextjs/server";
+const FinalCTA = async () => {
+  const { userId } = await auth();
   const stats = [
     {
       icon: Users,
@@ -98,7 +99,7 @@ const FinalCTA = () => {
           {/* CTA Button */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <a
-              href="/signup"
+              href={userId ? "/dashboard" : "/sign-in"}
               className="group px-10 py-5 bg-white text-[#0A2463] rounded-xl hover:bg-gray-100 transition-all duration-300 font-bold text-xl shadow-2xl hover:shadow-3xl transform hover:-translate-y-1 flex items-center space-x-3"
             >
               <span>Launch Your Free Account</span>
@@ -107,7 +108,7 @@ const FinalCTA = () => {
           </div>
 
           {/* Trust Indicators */}
-          <div className="mt-12 text-white/70 text-sm">
+          <div className="mt-12 text-white/70 text-md">
             <p>
               ✓ No credit card required • ✓ 14-day free trial • ✓ Cancel anytime
             </p>

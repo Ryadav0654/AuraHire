@@ -1,5 +1,5 @@
 @import "tailwindcss";
-
+@custom-variant dark (&:where(.dark, .dark *));
 @theme {
   --blue-1000: #2a8af6;
   --purple-1000: #a853ba;

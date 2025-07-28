@@ -4,7 +4,6 @@ const BASE_URL: string = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:8
 
 const apiClient = axios.create({
     baseURL: BASE_URL,
-    timeout: 5000,
     withCredentials: true
 }) 
 
