@@ -6,7 +6,8 @@
     "dev": "turbo run dev",
     "lint": "turbo run lint",
     "check-types": "turbo run check-types",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "web:docker": "cd apps/web && pnpm run build && pnpm run start"
   },
   "devDependencies": {
     "prettier": "^3.5.3",
@@ -16,7 +17,7 @@
   "packageManager": "pnpm@8.15.6",
   "workspaces": [
     "apps/web",
-    "apps/@repo/api",
+    "apps/api",
     "packages/@repo/db",
     "packages/@repo/ui"
   ],

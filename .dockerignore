@@ -1,1 +1,12 @@
-node_module
+**/node_modules
+**/.next
+**/dist
+.turbo
+.git
+.env
+docker-compose*
+Dockerfile*
+!package.json
+!pnpm-lock.yaml
+!turbo.json
+!pnpm-workspace.yaml

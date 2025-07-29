@@ -1,0 +1,30 @@
+FROM node:18-alpine
+WORKDIR /app
+
+# Install pnpm globally
+RUN npm install -g pnpm
+
+# Copy root files (as root)
+COPY package.json pnpm-lock.yaml turbo.json pnpm-workspace.yaml ./
+
+# Copy web files (as root)
+COPY apps/web/package.json ./apps/web/
+COPY /packages ./packages/
+
+# Install dependencies as root
+RUN pnpm install --frozen-lockfile
+
+# Change ownership to node user
+RUN chown -R node:node /app
+
+# Switch to non-root user
+USER node
+
+# Create turbo cache directory
+# RUN mkdir -p /app/.turbo && chown -R node:node /app/.turbo
+
+# Expose port
+EXPOSE 3000
+
+# Start dev server
+CMD ["pnpm", "run", "dev", "--filter=web"]
