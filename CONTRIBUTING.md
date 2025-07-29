@@ -37,19 +37,28 @@ cp .env.example .env
 pnpm run dev
 
 # Or run specific workspace
-pnpm run dev --filter=web
+pnpm run dev --filter=web # For web workspace
+pnpm run dev --filter=api # For API workspace
 ```
 
-<!-- ## 🐋 Docker Development
-```bash
-# Build and start containers
-docker compose up --build
+## 🐋 Docker Development(docker-compose)
+> Ensure you have `Docker` and `Docker Compose` installed.
 
+```bash
+#  start containers
+docker compose up 
+
+# stop containers
+docker compose down
+```
+
+```bash
 # Access services:
 # - Web: http://localhost:3000
-# - API: http://localhost:5000
-# - MongoDB: mongodb://localhost:27017
-``` -->
+# - API: http://localhost:8080
+# - MongoDB: mongodb://mongo:27017
+```
+
 
 ## 🔍 Finding Issues
 Look for these labels in our [Issues Section](https://github.com/yourusername/aurahire/issues):
