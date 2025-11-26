@@ -12,7 +12,6 @@ export const getResumeAtsResponse = async (req: Request, res: Response) => {
             return;
         }
 
-        // TODO: Add ATS logic here
         const response = await atsAnalyeser(resume_url, atsAnalyzerPrompt(jobDescription)); 
         if(!response){
             res.status(404).json({ message: "Error while sending ATS response" });

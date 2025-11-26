@@ -9,9 +9,10 @@
     "build": "npx tsc -b"
   },
   "keywords": [],
-  "author": "",
+  "author": "Ravindra Yadav",
   "license": "ISC",
   "dependencies": {
+    "@clerk/express": "^1.7.18",
     "@google/genai": "^1.9.0",
     "cloudinary": "^2.7.0",
     "cors": "^2.8.5",

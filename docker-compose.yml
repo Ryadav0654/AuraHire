@@ -9,8 +9,6 @@ services:
     volumes:
       - .:/app
       - /app/node_modules
-      # - /app/.turbo
-      # - /app/packages/db/node_modules
       - /home/node/.pnpm-store  # Add PNPM store volume
     environment:
       - /apps/web/.env
@@ -27,13 +25,8 @@ services:
     restart: always
     volumes:
       - .:/app
-      # - /app/node_modules
-      # - /app/.turbo
-      # - /app/packages/db/node_modules
       - /home/node/.pnpm-store  # Add PNPM store volume
     environment:
-      # - MONGODB_URI=mongodb://mongo:27017/mydb
-      # - PORT=8000
       - /apps/api/.env
     depends_on:
       - mongo

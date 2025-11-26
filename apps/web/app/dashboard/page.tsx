@@ -27,7 +27,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import ResumeAnalyzer from "../analyzertest/page";
-import { UserButton, UserProfile, useUser } from "@clerk/nextjs";
+import { UserButton, useUser } from "@clerk/nextjs";
 const Dashboard = () => {
   const [activeTab, setActiveTab] = useState("dashboard");
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
@@ -42,8 +42,9 @@ const Dashboard = () => {
       icon: LayoutDashboard,
       slug: "/dashboard",
     },
-    { id: "analyzer", label: "Resume Analyzer", icon: FileText, slug: "/analyzer" },
     { id: "tracker", label: "Job Tracker", icon: Briefcase, slug: "/tracker" },
+    { id: "resume", label: "Resume Tracker", icon: FileText, slug: "/resume-tracker" },
+    { id: "analyzer", label: "Resume Analyzer", icon: FileText, slug: "/analyzer" },
     { id: "insights", label: "Insights", icon: BarChart3, slug: "/insights" },
     { id: "settings", label: "Settings", icon: Settings, slug: "/profile" },
   ];
@@ -510,132 +511,6 @@ const Dashboard = () => {
                   </div>
                 </div>
 
-                {/* Job Tracker Section */}
-                {/* <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm"> */}
-                {/* <div className="p-4 lg:p-6 border-b border-gray-200 dark:border-gray-700">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
-                <h3 className="text-base lg:text-lg font-semibold text-gray-900 dark:text-white">Job Applications</h3>
-                <button className="flex items-center justify-center space-x-2 px-4 py-2 lg:py-2.5 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition-colors text-sm lg:text-base font-medium">
-                  <Plus className="w-4 h-4" />
-                  <span>Add Job</span>
-                </button>
-              </div>
-            </div> */}
-
-                {/* Mobile/Tablet Card View */}
-                {/* <div className="xl:hidden">
-              <div className="max-h-96 overflow-y-auto">
-                {jobApplications.map((job) => (
-                  <div key={job.id} className="p-4 border-b border-gray-200 dark:border-gray-700 last:border-b-0 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-                    <div className="flex items-start justify-between mb-3">
-                      <div className="flex items-center space-x-3 min-w-0 flex-1">
-                        <div className="w-10 h-10 bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center flex-shrink-0">
-                          <span className="text-sm font-medium text-gray-600 dark:text-gray-300">
-                            {job.company.charAt(0)}
-                          </span>
-                        </div>
-                        <div className="min-w-0 flex-1">
-                          <div className="font-medium text-gray-900 dark:text-white truncate">{job.company}</div>
-                          <div className="text-sm text-gray-600 dark:text-gray-300 truncate">{job.position}</div>
-                          <div className="text-xs text-gray-500 dark:text-gray-400 mt-1 lg:hidden">{job.location}</div>
-                        </div>
-                      </div>
-                      <span className={`inline-flex items-center space-x-1 px-2.5 py-0.5 rounded-full text-xs font-medium border flex-shrink-0 ${getStatusColor(job.status)}`}>
-                        {getStatusIcon(job.status)}
-                        <span>{job.status}</span>
-                      </span>
-                    </div>
-                    
-                    <div className="grid grid-cols-2 gap-2 text-xs text-gray-500 dark:text-gray-400 mb-3">
-                      <div>Applied: {job.appliedDate}</div>
-                      <div className="text-right">{job.salary}</div>
-                      <div className="hidden lg:block col-span-2">{job.location}</div>
-                    </div>
-                    
-                    <div className="flex items-center space-x-2">
-                      <button className="flex-1 flex items-center justify-center space-x-1 px-3 py-2 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-lg transition-colors text-sm">
-                        <Eye className="w-4 h-4" />
-                        <span className="hidden sm:inline">View</span>
-                      </button>
-                      <button className="flex-1 flex items-center justify-center space-x-1 px-3 py-2 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-lg transition-colors text-sm">
-                        <Edit className="w-4 h-4" />
-                        <span className="hidden sm:inline">Edit</span>
-                      </button>
-                      <button className="p-2 text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors">
-                        <Trash2 className="w-4 h-4" />
-                      </button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div> */}
-
-                {/* Desktop Table View */}
-                {/* <div className="hidden xl:block">
-              <div className="overflow-x-auto">
-                <table className="w-full">
-                  <thead className="bg-gray-50 dark:bg-gray-700">
-                    <tr>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Company</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Position</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Status</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Applied</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Salary</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Location</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-                    {jobApplications.map((job) => (
-                      <tr key={job.id} className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="flex items-center">
-                            <div className="w-8 h-8 bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center mr-3 flex-shrink-0">
-                              <span className="text-xs font-medium text-gray-600 dark:text-gray-300">
-                                {job.company.charAt(0)}
-                              </span>
-                            </div>
-                            <span className="font-medium text-gray-900 dark:text-white">{job.company}</span>
-                          </div>
-                        </td>
-                        <td className="px-6 py-4 text-sm text-gray-900 dark:text-white max-w-xs truncate">
-                          {job.position}
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <span className={`inline-flex items-center space-x-1 px-2.5 py-0.5 rounded-full text-xs font-medium border ${getStatusColor(job.status)}`}>
-                            {getStatusIcon(job.status)}
-                            <span>{job.status}</span>
-                          </span>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
-                          {job.appliedDate}
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
-                          {job.salary}
-                        </td>
-                        <td className="px-6 py-4 text-sm text-gray-500 dark:text-gray-400 max-w-xs truncate">
-                          {job.location}
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
-                          <div className="flex items-center space-x-2">
-                            <button className="p-1 hover:bg-gray-100 dark:hover:bg-gray-600 rounded transition-colors" title="View">
-                              <Eye className="w-4 h-4" />
-                            </button>
-                            <button className="p-1 hover:bg-gray-100 dark:hover:bg-gray-600 rounded transition-colors" title="Edit">
-                              <Edit className="w-4 h-4" />
-                            </button>
-                            <button className="p-1 hover:bg-gray-100 dark:hover:bg-gray-600 rounded text-red-600 transition-colors" title="Delete">
-                              <Trash2 className="w-4 h-4" />
-                            </button>
-                          </div>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div> */}
-                {/* </div> */}
 
                 {/* Insights Section */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
@@ -754,14 +629,269 @@ const Dashboard = () => {
                     </div>
                   </div>
                 </div>
+                {/* Job Tracker Section */}
+                <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm">
+                  <div className="p-4 lg:p-6 border-b border-gray-200 dark:border-gray-700">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
+                      <h3 className="text-base lg:text-lg font-semibold text-gray-900 dark:text-white">Job Applications</h3>
+                      <button className="flex items-center justify-center space-x-2 px-4 py-2 lg:py-2.5 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition-colors text-sm lg:text-base font-medium">
+                        <Plus className="w-4 h-4" />
+                        <span>Add Job</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Mobile/Tablet Card View */}
+                  <div className="xl:hidden">
+                    <div className="max-h-96 overflow-y-auto">
+                      {jobApplications.map((job) => (
+                        <div key={job.id} className="p-4 border-b border-gray-200 dark:border-gray-700 last:border-b-0 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                          <div className="flex items-start justify-between mb-3">
+                            <div className="flex items-center space-x-3 min-w-0 flex-1">
+                              <div className="w-10 h-10 bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <span className="text-sm font-medium text-gray-600 dark:text-gray-300">
+                                  {job.company.charAt(0)}
+                                </span>
+                              </div>
+                              <div className="min-w-0 flex-1">
+                                <div className="font-medium text-gray-900 dark:text-white truncate">{job.company}</div>
+                                <div className="text-sm text-gray-600 dark:text-gray-300 truncate">{job.position}</div>
+                                <div className="text-xs text-gray-500 dark:text-gray-400 mt-1 lg:hidden">{job.location}</div>
+                              </div>
+                            </div>
+                            <span className={`inline-flex items-center space-x-1 px-2.5 py-0.5 rounded-full text-xs font-medium border flex-shrink-0 ${getStatusColor(job.status)}`}>
+                              {getStatusIcon(job.status)}
+                              <span>{job.status}</span>
+                            </span>
+                          </div>
+
+                          <div className="grid grid-cols-2 gap-2 text-xs text-gray-500 dark:text-gray-400 mb-3">
+                            <div>Applied: {job.appliedDate}</div>
+                            <div className="text-right">{job.salary}</div>
+                            <div className="hidden lg:block col-span-2">{job.location}</div>
+                          </div>
+
+                          <div className="flex items-center space-x-2">
+                            <button className="flex-1 flex items-center justify-center space-x-1 px-3 py-2 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-lg transition-colors text-sm">
+                              <Eye className="w-4 h-4" />
+                              <span className="hidden sm:inline">View</span>
+                            </button>
+                            <button className="flex-1 flex items-center justify-center space-x-1 px-3 py-2 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-lg transition-colors text-sm">
+                              <Edit className="w-4 h-4" />
+                              <span className="hidden sm:inline">Edit</span>
+                            </button>
+                            <button className="p-2 text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors">
+                              <Trash2 className="w-4 h-4" />
+                            </button>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Desktop Table View */}
+                  <div className="hidden xl:block">
+                    <div className="overflow-x-auto">
+                      <table className="w-full">
+                        <thead className="bg-gray-50 dark:bg-gray-700">
+                          <tr>
+                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Company</th>
+                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Position</th>
+                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Status</th>
+                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Applied</th>
+                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Salary</th>
+                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Location</th>
+                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Actions</th>
+                          </tr>
+                        </thead>
+                        <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                          {jobApplications.map((job) => (
+                            <tr key={job.id} className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                              <td className="px-6 py-4 whitespace-nowrap">
+                                <div className="flex items-center">
+                                  <div className="w-8 h-8 bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center mr-3 flex-shrink-0">
+                                    <span className="text-xs font-medium text-gray-600 dark:text-gray-300">
+                                      {job.company.charAt(0)}
+                                    </span>
+                                  </div>
+                                  <span className="font-medium text-gray-900 dark:text-white">{job.company}</span>
+                                </div>
+                              </td>
+                              <td className="px-6 py-4 text-sm text-gray-900 dark:text-white max-w-xs truncate">
+                                {job.position}
+                              </td>
+                              <td className="px-6 py-4 whitespace-nowrap">
+                                <span className={`inline-flex items-center space-x-1 px-2.5 py-0.5 rounded-full text-xs font-medium border ${getStatusColor(job.status)}`}>
+                                  {getStatusIcon(job.status)}
+                                  <span>{job.status}</span>
+                                </span>
+                              </td>
+                              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
+                                {job.appliedDate}
+                              </td>
+                              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
+                                {job.salary}
+                              </td>
+                              <td className="px-6 py-4 text-sm text-gray-500 dark:text-gray-400 max-w-xs truncate">
+                                {job.location}
+                              </td>
+                              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
+                                <div className="flex items-center space-x-2">
+                                  <button className="p-1 hover:bg-gray-100 dark:hover:bg-gray-600 rounded transition-colors" title="View">
+                                    <Eye className="w-4 h-4" />
+                                  </button>
+                                  <button className="p-1 hover:bg-gray-100 dark:hover:bg-gray-600 rounded transition-colors" title="Edit">
+                                    <Edit className="w-4 h-4" />
+                                  </button>
+                                  <button className="p-1 hover:bg-gray-100 dark:hover:bg-gray-600 rounded text-red-600 transition-colors" title="Delete">
+                                    <Trash2 className="w-4 h-4" />
+                                  </button>
+                                </div>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+
               </>
             )}
           {activeTab === 'tracker' && (
-            <div className="text-center py-12">
-              <Briefcase className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">Job Tracker</h3>
-              <p className="text-gray-600 dark:text-gray-300">Advanced job tracking features coming soon!</p>
-            </div>
+            <>
+              {/* <div className="text-center py-12">
+                <Briefcase className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">Job Tracker</h3>
+                <p className="text-gray-600 dark:text-gray-300">Advanced job tracking features coming soon!</p>
+              </div> */}
+              {/* Job Tracker Section */}
+              <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm">
+                <div className="p-4 lg:p-6 border-b border-gray-200 dark:border-gray-700">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
+                    <h3 className="text-base lg:text-lg font-semibold text-gray-900 dark:text-white">Job Applications</h3>
+                    <button className="flex items-center justify-center space-x-2 px-4 py-2 lg:py-2.5 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition-colors text-sm lg:text-base font-medium">
+                      <Plus className="w-4 h-4" />
+                      <span>Add Job</span>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Mobile/Tablet Card View */}
+                <div className="xl:hidden">
+                  <div className="max-h-96 overflow-y-auto">
+                    {jobApplications.map((job) => (
+                      <div key={job.id} className="p-4 border-b border-gray-200 dark:border-gray-700 last:border-b-0 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                        <div className="flex items-start justify-between mb-3">
+                          <div className="flex items-center space-x-3 min-w-0 flex-1">
+                            <div className="w-10 h-10 bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center flex-shrink-0">
+                              <span className="text-sm font-medium text-gray-600 dark:text-gray-300">
+                                {job.company.charAt(0)}
+                              </span>
+                            </div>
+                            <div className="min-w-0 flex-1">
+                              <div className="font-medium text-gray-900 dark:text-white truncate">{job.company}</div>
+                              <div className="text-sm text-gray-600 dark:text-gray-300 truncate">{job.position}</div>
+                              <div className="text-xs text-gray-500 dark:text-gray-400 mt-1 lg:hidden">{job.location}</div>
+                            </div>
+                          </div>
+                          <span className={`inline-flex items-center space-x-1 px-2.5 py-0.5 rounded-full text-xs font-medium border flex-shrink-0 ${getStatusColor(job.status)}`}>
+                            {getStatusIcon(job.status)}
+                            <span>{job.status}</span>
+                          </span>
+                        </div>
+
+                        <div className="grid grid-cols-2 gap-2 text-xs text-gray-500 dark:text-gray-400 mb-3">
+                          <div>Applied: {job.appliedDate}</div>
+                          <div className="text-right">{job.salary}</div>
+                          <div className="hidden lg:block col-span-2">{job.location}</div>
+                        </div>
+
+                        <div className="flex items-center space-x-2">
+                          <button className="flex-1 flex items-center justify-center space-x-1 px-3 py-2 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-lg transition-colors text-sm">
+                            <Eye className="w-4 h-4" />
+                            <span className="hidden sm:inline">View</span>
+                          </button>
+                          <button className="flex-1 flex items-center justify-center space-x-1 px-3 py-2 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-lg transition-colors text-sm">
+                            <Edit className="w-4 h-4" />
+                            <span className="hidden sm:inline">Edit</span>
+                          </button>
+                          <button className="p-2 text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors">
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Desktop Table View */}
+                <div className="hidden xl:block">
+                  <div className="overflow-x-auto">
+                    <table className="w-full">
+                      <thead className="bg-gray-50 dark:bg-gray-700">
+                        <tr>
+                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Company</th>
+                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Position</th>
+                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Status</th>
+                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Applied</th>
+                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Salary</th>
+                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Location</th>
+                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                        {jobApplications.map((job) => (
+                          <tr key={job.id} className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                            <td className="px-6 py-4 whitespace-nowrap">
+                              <div className="flex items-center">
+                                <div className="w-8 h-8 bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center mr-3 flex-shrink-0">
+                                  <span className="text-xs font-medium text-gray-600 dark:text-gray-300">
+                                    {job.company.charAt(0)}
+                                  </span>
+                                </div>
+                                <span className="font-medium text-gray-900 dark:text-white">{job.company}</span>
+                              </div>
+                            </td>
+                            <td className="px-6 py-4 text-sm text-gray-900 dark:text-white max-w-xs truncate">
+                              {job.position}
+                            </td>
+                            <td className="px-6 py-4 whitespace-nowrap">
+                              <span className={`inline-flex items-center space-x-1 px-2.5 py-0.5 rounded-full text-xs font-medium border ${getStatusColor(job.status)}`}>
+                                {getStatusIcon(job.status)}
+                                <span>{job.status}</span>
+                              </span>
+                            </td>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
+                              {job.appliedDate}
+                            </td>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
+                              {job.salary}
+                            </td>
+                            <td className="px-6 py-4 text-sm text-gray-500 dark:text-gray-400 max-w-xs truncate">
+                              {job.location}
+                            </td>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
+                              <div className="flex items-center space-x-2">
+                                <button className="p-1 hover:bg-gray-100 dark:hover:bg-gray-600 rounded transition-colors" title="View">
+                                  <Eye className="w-4 h-4" />
+                                </button>
+                                <button className="p-1 hover:bg-gray-100 dark:hover:bg-gray-600 rounded transition-colors" title="Edit">
+                                  <Edit className="w-4 h-4" />
+                                </button>
+                                <button className="p-1 hover:bg-gray-100 dark:hover:bg-gray-600 rounded text-red-600 transition-colors" title="Delete">
+                                  <Trash2 className="w-4 h-4" />
+                                </button>
+                              </div>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </>
           )}
 
           {activeTab === 'insights' && (
@@ -774,12 +904,12 @@ const Dashboard = () => {
 
           {activeTab === 'settings' && (
             <>
-            <div className="text-center py-12">
-              <Settings className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+              <div className="text-center py-12">
+                <Settings className="w-16 h-16 text-gray-400 mx-auto mb-4" />
                 <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">Settings</h3>
                 <p className="text-gray-600 dark:text-gray-300">Account settings and preferences coming soon!</p>
-            </div>
-            {/* <div className="flex flex-col items-center w-full">
+              </div>
+              {/* <div className="flex flex-col items-center w-full">
               <UserProfile />
             </div> */}
             </>

@@ -40,7 +40,7 @@ const Hero = async () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
             <Link
               href={userId ? "/dashboard" : "/sign-in"}
-            className="group px-8 py-4 bg-[#00C1D4] text-white rounded-xl hover:bg-[#00A5B8] transition-all duration-300 font-semibold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 flex items-center space-x-2"
+            className="group px-6 py-3 bg-[#00C1D4] text-white rounded-xl hover:bg-[#00A5B8] transition-all duration-300 font-semibold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 flex items-center space-x-2"
            
             >
              Get Started Free

@@ -1,0 +1,36 @@
+name: Deploy frontend Application
+on: 
+  push:
+    branches: ["dev"]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v2
+
+      - name: Docker login
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          file: ./docker/Dockerfile.frontend
+          push: true
+          tags: auraHire/auraHire-frontend:${{ github.sha }}
+
+      - name: Ssh into the VM and start the docker container
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            docker pull auraHire/auraHire-frontend:${{ github.sha }}
+            docker stop auraHire-frontend || true
+            docker rm auraHire-frontend || true
+            docker run -d --name auraHire-frontend -p 80:80 auraHire/auraHire-frontend:${{ github.sha }}

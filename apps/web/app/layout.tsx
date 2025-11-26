@@ -24,7 +24,9 @@ export default function RootLayout({
         }}
       >
         <html lang="en">
-          <body className={geist.className}>{children}</body>
+          <body className={geist.className}>
+            {children}
+          </body>
         </html>
       </ClerkProvider>
     </DarkModeProvider>
